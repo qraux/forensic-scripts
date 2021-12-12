@@ -1,7 +1,7 @@
 # Dump frames from multiple video files
 # Usage: dumpframes.py path_to_videos
 # Prerequisites: Python 3 and ffmpeg
-# v0.94
+# v0.95
 
 import os
 import sys
@@ -10,9 +10,10 @@ import subprocess
 def main():
 	os.system('clear')
 	pathffmpeg="/bin/ffmpeg"
-	
+		
 	if not os.path.isfile(pathffmpeg):
-		print("ffmpeg meybe not installed")
+		print("ffmpeg maybe not installed? (" + pathffmpeg + ")")
+		print("Change path in script.")
 		sys.exit()
 	if len(sys.argv) != 2:
 		print("Invalid number of arguments.")
@@ -21,7 +22,7 @@ def main():
 	path=sys.argv[1]
 	
 	if path == "-h":
-		print("Usage: python3 dumpframes.py /home/John/movies")
+		print("Usage: python3 dumpframes.py /home/John/videos")
 		sys.exit()	
 	if not os.path.exists(path):
 		sys.exit()
@@ -37,7 +38,7 @@ def main():
 			sys.exit()
 						
 		if os.path.isfile(filepath):
-			print('Passed file check ('+str(filepath) + ")")
+			print("Passed file check ("+str(filepath) + ")")
 			outfile=str(outpath) + str("/thumb%000004d.png")
 			print("Outfile: " + outfile)
 			try:
