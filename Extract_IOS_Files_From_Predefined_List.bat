@@ -1,7 +1,7 @@
 @echo off
-REM Extract files from an IOS FFS zip and predefined list.
-REM Just add or delete paths in the files variable.
-REM Version 1
+REM Drag and drop an IOS FFS zip on the bat file and defined files will be extracted.
+REM Just add or delete file paths in the files variable to modificate the outcome.
+REM Version 1.1
 
 set PathTo7zip=C:\Program Files\7-Zip\7z.exe
 set "files=/private/var/mobile/media/PhotoData/Photos.Sqlite /private/var/mobile/media/PhotoData/Photos.Sqlite-shm /private/var/mobile/media/PhotoData/Photos.Sqlite-wal"
