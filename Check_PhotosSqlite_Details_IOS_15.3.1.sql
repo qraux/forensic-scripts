@@ -6,5 +6,18 @@ left JOIN ZCLOUDMASTERMEDIAMETADATA ON ZCLOUDMASTERMEDIAMETADATA.Z_PK = ZCLOUDMA
 left JOIN ZMOMENT on ZMOMENT.ZUUID = ZASSET.ZMOMENT
 left JOIN ZEXTENDEDATTRIBUTES on ZEXTENDEDATTRIBUTES.ZASSET = ZASSET.Z_PK
 
+-- FILTER
 -- Filename from i.g. /mobile/Media/PhotoData/CPL/storage/filecache/Acv/cplXXXXXXXXXXXXXXXXXXXXX.mp4
--- WHERE ZADDITIONALASSETATTRIBUTES.ZMASTERFINGERPRINT = 'XXXXXXXXXXXXXXXXXXXXX'
+--WHERE ZADDITIONALASSETATTRIBUTES.ZMASTERFINGERPRINT = 'XXXXXXXXXXXXXXXXXXXXX'
+WHERE ZADDITIONALASSETATTRIBUTES.ZIMPORTEDBYBUNDLEIDENTIFIER = 'com.toyopagroup.picaboo'
+--com.toyopagroup.picaboo
+--com.apple.springboard
+--com.apple.camera.CameraMessageApp
+
+-- Snapchat
+-- recorded-123435789765.mp4 probobly recorded with the device.
+-- cm-chat-media-video-1_12312323-f422-5c1a-8822-123230ae4cd1_5_0_0.mov probobly recieved via Snapchat (or other app).
+-- USERNAME_REDACTED~121212DD-01ED-1234-BC1C-0F6CEA11121E.mov probobly sent from device via Snapchat.
+
+
+
