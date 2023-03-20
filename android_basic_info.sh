@@ -60,7 +60,7 @@ tesseract=$(which tesseract)
 tesseract ITF_EVIDENCE_IMEI.png tesseract_imei
 echo ""
 echo "IMEI info from OCR scan:"
-cat tesseract_imei.txt | awk 'NF' >> ${SAVEPATH}.txt
+cat tesseract_imei.txt | awk 'NF' | tee -a ${SAVEPATH}.txt
 echo ""
 echo "Done."
 exit 0
