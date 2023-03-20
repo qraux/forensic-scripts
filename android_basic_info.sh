@@ -1,7 +1,7 @@
 #!/bin/bash
 # 2023-03-20
-# Mobile phone details via adb.
-# Requirements: tesseract
+# Collecting basic info from Android with adb.
+# Requirements: adb, tesseract
 
 NOW=$(date +"%Y-%m-%d_%H-%M-%S")
 MANUFACTURER=$(adb shell getprop ro.product.manufacturer)
@@ -46,8 +46,6 @@ echo ""
 echo "Above data saved to file ${SAVEPATH}.txt"
 echo ""
 echo "Trying to retrieve IMEI with keycode. Review the phones display."
-#adb shell dumpsys iphonesubinfo  #works only for phones below Android 5 Lolipop.  
-#adb shell "imei=$(input keyevent KEYCODE_CALL;sleep 1;input text '*#06#'; uiautomator dump --compressed /dev/stdout|sed s/\>\<\/\\n/g|grep -A1 IMEI|tail -n1|sed -e 's/.*text=\"//' -e 's/\".*//'); echo ${imei:0:16}"
 adb shell "input keyevent KEYCODE_CALL;sleep 1;input text '*#06#'"
 sleep 2
 echo ""
