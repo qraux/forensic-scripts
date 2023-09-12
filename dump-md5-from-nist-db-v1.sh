@@ -1,8 +1,9 @@
 #!/bin/sh
 # Export md5 hashes from NIST RDS hash dbs.
-# 2023-09-11
+# 2023-09-12
 
 hashdb=$1
+outfile=${hashdb}_md5.txt
 
 if [ -z "$hashdb" ] || [ ! -f "$hashdb" ]
 then
@@ -29,9 +30,9 @@ SELECT md5 FROM EXPORT ORDER BY md5;
 .q
 EOF
 
-echo "MD5" > hashes.txt
-cat output.txt >> hashes.txt
-head -n 2 hashes.txt
-tail -n 2 hashes.txt
-wc -l hashes.txt
+echo "MD5" > ${outfile}
+cat output.txt >> ${outfile}
+head -n 2 ${outfile}
+tail -n 2 ${outfile}
+wc -l ${outfile}
 rm output.txt
