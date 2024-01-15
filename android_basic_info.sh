@@ -1,5 +1,5 @@
 #!/bin/bash
-# 2023-03
+# 2024-01
 # Collecting basic info from Android with adb.
 # Requirements: adb, tesseract
 
@@ -46,7 +46,14 @@ echo "Encryption:" $(adb shell getprop crypto.state) | tee -a ${OUTFILE}.txt
 echo "Android ID:" $(adb shell settings get secure android_id) | tee -a ${OUTFILE}.txt
 echo ""
 echo ""
-echo "Collection data with dumpsys and logcat..."
+echo "Collecting settings..."
+adb shell settings list global > ${OUTFILE}.global_settings.txt
+adb shell settings list system > ${OUTFILE}.system_settings.txt
+adb shell settings list secure > ${OUTFILE}.secure_settings.txt
+#ABX format, use https://github.com/cclgroupltd/android-bits/tree/main/ccl_abx
+echo ""
+echo ""
+echo "Collecting data with dumpsys and logcat..."
 adb shell dumpsys user > ${OUTFILE}.dumpsys.user.txt
 adb shell dumpsys usagestats > ${OUTFILE}.usagestats.txt
 adb shell dumpsys wifi > ${OUTFILE}.wifi.txt
@@ -61,7 +68,9 @@ adb shell dumpsys meminfo -a > ${OUTFILE}.dumpsys.meminfo.txt
 adb shell dumpsys procstats --full-details > ${OUTFILE}.dumpsys.procstats.txt
 adb shell logcat -S -b all > ${OUTFILE}.logcat.top.txt
 adb shell logcat -d -b all V:* > ${OUTFILE}.logcat.txt
-echo ""
+
+
+    
 echo "Trying to retrieve IMEI with keycode. Review the phone display."
 sleep 2
 adb shell "input keyevent KEYCODE_CALL;sleep 1;input text '*#06#'"
@@ -75,7 +84,7 @@ adb pull "/storage/self/primary/ITF_EVIDENCE_IMEI.png" .
 echo ""
 echo "Result from screenshot OCR scanning:"
 tess=$(which tesseract)
-echo "DEBUG:" ${tess}
+#echo "DEBUG:" ${tess}
 ${tess} ITF_EVIDENCE_IMEI.png tesseract_imei
 echo ""
 echo "IMEI info from OCR scan. Compare with image."
