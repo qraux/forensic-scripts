@@ -6,6 +6,7 @@
 TIME=$(date +"%Y.%m.%d_%H.%M.%S")
 MANUFACTURER=$(adb shell getprop ro.product.manufacturer)
 MODEL=$(adb shell getprop ro.product.model)
+MODEL=$(echo ${MODEL// /_})
 OUTFILE=$MANUFACTURER"_"$MODEL
 OUTFOLDER=$TIME"_"$OUTFILE
 mkdir -p ${OUTFOLDER}
@@ -13,7 +14,7 @@ cd ${OUTFOLDER}
 
 clear
 echo "Forensic computer date and time:" $(date +"%Y-%m-%d %H:%M:%S.%Z.%z") | tee -a ${OUTFILE}.txt
-echo "" | tee -a  ${OUTFILE}.txt
+""echo "" | tee -a  ${OUTFILE}.txt
 echo "Device times:" $(adb shell uptime) | tee -a ${OUTFILE}.txt
 echo "Manufacturer:" $(adb shell getprop ro.product.manufacturer) | tee -a ${OUTFILE}.txt
 echo "Model:" $(adb shell getprop ro.product.model) | tee -a  ${OUTFILE}.txt
