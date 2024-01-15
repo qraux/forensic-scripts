@@ -47,30 +47,29 @@ echo "Android ID:" $(adb shell settings get secure android_id) | tee -a ${OUTFIL
 echo ""
 echo ""
 echo "Collecting settings..."
-adb shell settings list global > ${OUTFILE}.global_settings.txt
-adb shell settings list system > ${OUTFILE}.system_settings.txt
-adb shell settings list secure > ${OUTFILE}.secure_settings.txt
+echo "Global Settings:" $(adb shell settings list global) | tee -a ${OUTFILE}.global.settings.txt
+echo "System Settings:" $(adb shell settings list system) | tee -a ${OUTFILE}.system.settings.txt
+echo "Secure Settings:" $(adb shell settings list secure) | tee -a ${OUTFILE}.secure.settings.txt
 #ABX format, use https://github.com/cclgroupltd/android-bits/tree/main/ccl_abx
 echo ""
 echo ""
 echo "Collecting data with dumpsys and logcat..."
-adb shell dumpsys user > ${OUTFILE}.dumpsys.user.txt
-adb shell dumpsys usagestats > ${OUTFILE}.usagestats.txt
-adb shell dumpsys wifi > ${OUTFILE}.wifi.txt
-adb shell dumpsys batterystats > ${OUTFILE}.batterystats.txt
-adb shell dumpsys activity > ${OUTFILE}.dumpsys.activity.txt
-adb shell dumpsys appops > ${OUTFILE}.dumpsys.apops.txt
-adb shell dumpsys account > ${OUTFILE}.dumpsys.account.txt
-adb shell dumpsys dbinfo > ${OUTFILE}.dumpsys.dbinfo.txt
-adb shell dumpsys telecom > ${OUTFILE}.dumpsys.telecom.txt
-adb shell dumpsys battery > ${OUTFILE}.dumpsys.battery.txt
-adb shell dumpsys meminfo -a > ${OUTFILE}.dumpsys.meminfo.txt
-adb shell dumpsys procstats --full-details > ${OUTFILE}.dumpsys.procstats.txt
-adb shell logcat -S -b all > ${OUTFILE}.logcat.top.txt
-adb shell logcat -d -b all V:* > ${OUTFILE}.logcat.txt
-
-
-    
+echo "Dumpsys User:" $(adb shell dumpsys user) | tee -a ${OUTFILE}.dumpsys.user.txt
+echo "Dumpsys UsageStats:" $(adb shell dumpsys usagestats) | tee -a ${OUTFILE}.usagestats.txt
+echo "Dumpsys Wifi:" $(adb shell dumpsys wifi) | tee -a ${OUTFILE}.wifi.txt
+echo "Dumpsys Batterystats:" $(adb shell dumpsys batterystats) | tee -a ${OUTFILE}.batterystats.txt
+echo "Dumpsys Activity:" $(adb shell dumpsys activity) | tee -a ${OUTFILE}.dumpsys.activity.txt
+echo "Dumpsys Appops:" $(adb shell dumpsys appops) | tee -a ${OUTFILE}.dumpsys.appops.txt
+echo "Dumpsys Account:" $(adb shell dumpsys account) | tee -a ${OUTFILE}.dumpsys.account.txt
+echo "Dumpsys Dbinfo:" $(adb shell dumpsys dbinfo) | tee -a ${OUTFILE}.dumpsys.dbinfo.txt
+echo "Dumpsys Telecom:" $(adb shell dumpsys telecom) | tee -a ${OUTFILE}.dumpsys.telecom.txt
+echo "Dumpsys Battery:" $(adb shell dumpsys battery) | tee -a ${OUTFILE}.dumpsys.battery.txt
+echo "Dumpsys MemInfo:" $(adb shell dumpsys meminfo) | tee -a ${OUTFILE}.dumpsys.meminfo.txt
+echo "Dumpsys Procstats:" $(adb shell dumpsys procstats --full-details) | tee -a ${OUTFILE}.dumpsys.procstats.txt
+echo "Logcat Top:" $(adb shell logcat -S -b all) | tee -a  ${OUTFILE}.logcat.top.txt
+echo "Logcat All:" $(adb shell logcat -d -b all V:*) | tee -a ${OUTFILE}.logcat.txt
+echo ""
+echo "" 
 echo "Trying to retrieve IMEI with keycode. Review the phone display."
 sleep 2
 adb shell "input keyevent KEYCODE_CALL;sleep 1;input text '*#06#'"
