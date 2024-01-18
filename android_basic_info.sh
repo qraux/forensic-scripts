@@ -14,7 +14,6 @@ cd ${OUTFOLDER}
 
 clear
 echo "Forensic computer date and time:" $(date +"%Y-%m-%d %H:%M:%S.%Z.%z") | tee -a ${OUTFILE}.txt
-""echo "" | tee -a  ${OUTFILE}.txt
 echo "Device times:" $(adb shell uptime) | tee -a ${OUTFILE}.txt
 echo "Manufacturer:" $(adb shell getprop ro.product.manufacturer) | tee -a ${OUTFILE}.txt
 echo "Model:" $(adb shell getprop ro.product.model) | tee -a  ${OUTFILE}.txt
